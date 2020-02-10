@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <mat-card class="customer-card">
+    <mat-card-header>
+      <mat-card-title>Add Customer </mat-card-title>
+    </mat-card-header>
+    <hr>
+    <mat-card-content>
+      <div class="d-flex justify-content-center row">
+        <form (ngSubmit)="saveCustomer()" [formGroup]="customerForm" class="customer-form" #formDirective="ngForm">
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Full Name </mat-label>
+            <input formControlName="name" autofocus matInput [ngClass]="{'is-invalid': nameErrMessage}" />
+            <mat-error>
+              {{nameErrMessage}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobile" [ngClass]="{'is-invalid': mobileErrMessage}">
+            <mat-error>
+              {{mobileErrMessage}}
+            </mat-error>
+            <mat-error *ngIf="customerForm.get('mobile').errors?.usernameAvailable">
+              User exists with mobile number
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Alt. Mobile</mat-label>
+            <input type="number" matInput formControlName="altmobile" [ngClass]="{'is-invalid': altmobileErrMessage}">
+            <mat-error>
+              {{altmobileErrMessage}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address" [ngClass]="{'is-invalid': addressErrMessage }"></textarea>
+            <mat-error>
+              {{addressErrMessage}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>City/Village</mat-label>
+            <input matInput formControlName="city" [ngClass]="{'is-invalid': cityErrMessage}" />
+            <mat-error>
+              {{cityErrMessage}}
+            </mat-error>
+          </mat-form-field>
+          <div class="col-md-12">
+            <div class="d-flex justify-content-end">
+              <button mat-raised-button color="accent" [disabled]="!customerForm.valid || custSaveStatus">{{custSaveText}}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

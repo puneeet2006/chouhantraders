@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Free Web tutorials">
+  <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+  <meta name="author" content="John Doe">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/">
+</head>
+
+<body>
+  <mat-toolbar color="primary">
+    <button mat-button [routerLink]="['/']">
+      <h1>{{title}}</h1>
+    </button>
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+    <span><button mat-raised-button [routerLink]="['/login']">Login</button></span>
+    <span><button mat-raised-button [routerLink]="['/addcustomer']">Add Customer</button></span>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</body>
+
+</html>

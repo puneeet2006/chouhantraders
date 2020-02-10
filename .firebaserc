@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "chouhantradersdewas": {
+      "hosting": {
+        "chouhantraders": [
+          "chouhantradersdewas"
+        ]
+      }
+    }
+  }
+}
