@@ -17,8 +17,11 @@
     </button>
     <!-- This fills the remaining space of the current row -->
     <span class="example-fill-remaining-space"></span>
-    <span><button mat-raised-button [routerLink]="['/login']">Login</button></span>
-    <span><button mat-raised-button [routerLink]="['/addcustomer']">Add Customer</button></span>
+    <span><button class="m-1" mat-raised-button [routerLink]="['/login']">Login</button></span>
+    <span><button class="m-1" mat-raised-button [routerLink]="['/addcustomer']">Add Customer</button></span>
+    <span><button class="m-1" mat-raised-button [routerLink]="['/listcustomer']">List Customer</button></span>
+    <span><button class="m-1" mat-raised-button [routerLink]="['/listproduct']">List Products</button></span>
+    <span><button class="m-1" mat-raised-button [routerLink]="['/addstock']">Add Stock</button></span>
   </mat-toolbar>
   <router-outlet></router-outlet>
 </body>

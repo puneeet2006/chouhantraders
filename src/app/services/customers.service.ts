@@ -12,7 +12,7 @@ export class CustomersService {
   	}
 
   	getCustomers():Observable<any[]>{
-  		return this.aFireStore.collection('customer').valueChanges();
+  		return this.aFireStore.collection('customer').valueChanges({idField:'id'});
   	}
 
   	getCustomerByMobile(mobileNo):Observable<any[]>{

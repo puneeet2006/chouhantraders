@@ -23,14 +23,24 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule,MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
+import { 
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MAT_DATE_LOCALE
+} from '@angular/material';
+
+
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
-  ],
+    routingComponents,
+      ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
@@ -41,15 +51,22 @@ import {MatDialogModule} from '@angular/material/dialog';
     /*AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,*/
+    MatSelectModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
-  providers: [ {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 4000,verticalPosition: 'top', horizontalPosition:'right', panelClass: ['accent-snackbar']}}],
+  providers: [ {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 4000,verticalPosition: 'top', horizontalPosition:'right', panelClass: ['accent-snackbar']}},
+                { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+              ],
   bootstrap: [AppComponent],
 
 })

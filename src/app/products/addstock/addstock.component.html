@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <mat-card class="customer-card">
+    <mat-card-header>
+      <mat-card-title>Add Stock</mat-card-title>
+    </mat-card-header>
+    <hr>
+    <mat-card-content>
+      <div class="d-flex justify-content-center row">
+        <form (ngSubmit)="saveStock()" [formGroup]="stockForm" class="customer-form" #formDirective="ngForm">
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Biltery No</mat-label>
+            <input matInput formControlName="bilteryno" [ngClass]="{'is-invalid':(stockForm.get('bilteryno').touched || stockForm.get('bilteryno').dirty) && !stockForm.valid}" />
+            <mat-error *ngIf="stockForm.get('bilteryno').errors?.required">
+              Please enter biltery number
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Bill no </mat-label>
+            <input matInput formControlName="billno" />
+          </mat-form-field>
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Product Type</mat-label>
+            <mat-select formControlName="type" [ngClass]="{'is-invalid':(stockForm.get('type').touched || stockForm.get('type').dirty) && !stockForm.valid}">
+              <mat-option *ngFor="let product of products" [value]="product.id">
+                {{product.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="stockForm.get('type').errors?.required">
+              Please enter product type
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Quantity </mat-label>
+            <input matInput formControlName="qunatity" [ngClass]="{'is-invalid':(stockForm.get('qunatity').touched || stockForm.get('qunatity').dirty) && !stockForm.valid}" />
+            <span matSuffix>px</span>
+            <mat-error *ngIf="stockForm.get('qunatity').errors?.required">
+              Please enter product type
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Price </mat-label>
+            <input matInput formControlName="price" [ngClass]="{'is-invalid':(stockForm.get('price').touched || stockForm.get('price').dirty) && !stockForm.valid}" />
+            <mat-error *ngIf="stockForm.get('price').errors?.required">
+              Please enter product type
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" [ngClass]="{'is-invalid':(stockForm.get('date').touched || stockForm.get('date').dirty) && !stockForm.valid}">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="stockForm.get('date').errors?.required">
+              Please enter product type
+            </mat-error>
+          </mat-form-field>
+          <div class="col-md-12">
+            <div class="d-flex justify-content-end">
+              <button mat-raised-button color="accent" [disabled]="!stockForm.valid || stockSaveStatus">{{stockSaveText}}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

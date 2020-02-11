@@ -112,7 +112,6 @@ export class AddCustomerComponent implements OnInit {
 
   setErrorMessage(type,c:AbstractControl):void{
   	//
-  	console.log(c);
   	this.mobileErrMessage = '';
   	if((c.touched || c.dirty && c.errors)){
   		switch (type) {

@@ -16,11 +16,11 @@ export class AppComponent implements OnInit{
   constructor(private productService: ProductsService){}
 
   ngOnInit(){
-    this.productService.getProducts().subscribe(items=>{
+    /*this.productService.getProducts().subscribe(items=>{
       this.products = items;
        console.log(this.products)
 
-    });
+    });*/
    
   }
 
