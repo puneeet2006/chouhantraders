@@ -19,8 +19,9 @@ export class AddstockComponent implements OnInit {
 
   stockSaveStatus:boolean = false;
   stockSaveText:string = 'Save';
+  productMeasurement:string;
 
-
+ 
   constructor(private productService: ProductsService,private stockFB : FormBuilder, private afs:AngularFirestore,private _snackBar: MatSnackBar) { }
 
    products:IProducts[];
@@ -33,6 +34,11 @@ export class AddstockComponent implements OnInit {
 
     this.createStockForm();
 
+  }
+
+  onProductSelected(event){
+    const type = event.value;
+    this.productMeasurement = this.products.find(product=>product.id === type).mass;
   }
 
   createStockForm()

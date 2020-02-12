@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import {CustomersService} from '../../services/customers.service';
 import {ICustomer} from '../customer';
 import { Observable } from 'rxjs';
@@ -8,12 +8,18 @@ import { Observable } from 'rxjs';
   templateUrl: './list-customers.component.html',
   styleUrls: ['./list-customers.component.scss']
 })
+
+
 export class ListCustomersComponent implements OnInit {
+
+  @Output() public getUserData:EventEmitter<string> = new EventEmitter<string>();
 
   displayedColumns = [ 'name', 'mobile', 'altmobile','address','city','actions'];
   //dataSource:Observable<ICustomer[]>;
   filterList:ICustomer[];
   dataSource: ICustomer[];
+
+  selectedCust:string;
   constructor(private customerService: CustomersService) { }
   ngOnInit() {
   	//this.dataSource = this.customerService.getCustomers();
@@ -35,6 +41,11 @@ export class ListCustomersComponent implements OnInit {
   {
   	value = value.toLowerCase();
   	return this.dataSource.filter((item:ICustomer)=>item.name.toLowerCase().indexOf(value) !== -1)
+  }
+
+  selectedCustomer(elem)
+  {
+    this.getUserData.emit(elem);
   }
 
 }

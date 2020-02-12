@@ -20,7 +20,7 @@
           </mat-form-field>
           <mat-form-field class="col-md-12" appearance="fill">
             <mat-label>Product Type</mat-label>
-            <mat-select formControlName="type" [ngClass]="{'is-invalid':(stockForm.get('type').touched || stockForm.get('type').dirty) && !stockForm.valid}">
+            <mat-select (selectionChange)='onProductSelected($event)' formControlName="type" [ngClass]="{'is-invalid':(stockForm.get('type').touched || stockForm.get('type').dirty) && !stockForm.valid}">
               <mat-option *ngFor="let product of products" [value]="product.id">
                 {{product.name}}
               </mat-option>
@@ -32,7 +32,7 @@
           <mat-form-field class="col-md-12" appearance="fill">
             <mat-label>Quantity </mat-label>
             <input matInput formControlName="qunatity" [ngClass]="{'is-invalid':(stockForm.get('qunatity').touched || stockForm.get('qunatity').dirty) && !stockForm.valid}" />
-            <span matSuffix>px</span>
+            <span matSuffix class="text-uppercase">{{productMeasurement}}</span>
             <mat-error *ngIf="stockForm.get('qunatity').errors?.required">
               Please enter product type
             </mat-error>

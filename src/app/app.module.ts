@@ -4,6 +4,7 @@ import { AppRoutingModule,routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 //Firebase
 import { AngularFireModule } from 'angularfire2';
@@ -30,6 +31,8 @@ import {
   MatNativeDateModule,
   MAT_DATE_LOCALE
 } from '@angular/material';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -40,10 +43,12 @@ import {
   declarations: [
     AppComponent,
     routingComponents,
+    
       ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -51,6 +56,8 @@ import {
     /*AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,*/
+    MatRadioModule,
+    MatStepperModule,
     MatSelectModule,
     MatToolbarModule,
     MatButtonModule,
