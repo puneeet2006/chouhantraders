@@ -12,6 +12,6 @@ export class ProductsService {
   	}
 
   	getProducts():Observable<IProducts[]>{
-  		return this.aFireStore.collection('products').valueChanges();
+  		 return this.aFireStore.collection('products').valueChanges();
   	} 
 }

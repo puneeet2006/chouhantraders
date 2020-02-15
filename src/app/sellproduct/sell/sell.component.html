@@ -7,7 +7,7 @@
     <mat-card-content>
       <div class="d-flex justify-content-center row">
         <mat-horizontal-stepper labelPosition="bottom" #stepper class="w-100">
-          <!--<mat-step [stepControl]="firstFormGroup">
+          <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
               <ng-template matStepLabel>Select Customer</ng-template>
               <app-list-customers (getUserData)="getData($event)"> </app-list-customers>
@@ -15,42 +15,124 @@
                 <button mat-raised-button color="accent" matStepperNext [disabled]="custBtnStatus">Next</button>
               </div>
             </form>
-          </mat-step>-->
+          </mat-step>
           <mat-step [stepControl]="secondFormGroup">
             <ng-template matStepLabel>Add Products</ng-template>
-            <form #Form="ngForm">
-              <div class="row" *ngFor="let prod of prodKeys | async">
+            <div class="d-flex justify-content-end text-bold">
+              <h6 class="text-uppercase">Customer Name : {{customer.name}}</h6>
+            </div>
+            <div class="d-flex justify-content-end text-bold">
+              <h6>MOBILE : {{customer.mobile}}</h6>
+            </div>
+            <hr>
+            <form [formGroup]="secondFormGroup" class="p-4" style="border:1px solid #c2c2c2">
+              <div class="row mt-3" *ngFor="let prop of productMainKeys" [formGroupName]="prop.id">
                 <div class="col-md-2">
-                  <h5>{{prod.name}}</h5>
+                  <h4 class="text-uppercase">{{prop.id}} <small style="font-size: x-small;" class="text-muted">/{{prop.mass}}</small></h4>
                 </div>
-                <mat-form-field class="col-md-2" appearance="fill">
-                  <mat-label>Quantity </mat-label>
-                  <input matInput type="number" [value]=0 [(ngModel)]="qtd[prod.qtyModal]" />
-                  <span matSuffix class="text-uppercase">{{prod.mass}}</span>
-                </mat-form-field>
-                <mat-form-field class="col-md-2" appearance="fill">
-                  <mat-label>Price </mat-label>
-                  <input matInput type="number" value=0 [(ngModel)]="prc[prod.priceModal]" />
-                </mat-form-field>
-                <div class="col-md-2">
-                  <h5>{{(qtd[prod.qtyModal] || 0) * (prc[prod.priceModal] || 0) | currency : 'INR' }} </h5>
+                <div class="col-md-4" *ngFor="let prop1 of sellArr">
+                  <mat-form-field class="col-md-12" appearance="fill">
+                    <mat-label>{{prop1}} </mat-label>
+                    <input matInput type="number" [formControlName]="prop.id+'_'+prop1" (keyup)="calcPrice($event,prop.id)">
+                  </mat-form-field>
                 </div>
+                <h6 class="col-md-2 price ">
+                  {{prop.total | currency:'INR' }}
+                </h6>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-end mr-2 mt-2">
+                <h3>Grand Total: <span class="price">{{grandTotal | currency:'INR'}} </span> </h3>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-end mr-2 mt-2">
+                <!--<button mat-button matStepperPrevious>Back</button>-->
+                <button [disabled]="grandTotalStatus" mat-raised-button color="accent" matStepperNext>Next</button>
               </div>
             </form>
-            <div>
-              <h4></h4>
-            </div>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
+          </mat-step>
+          <mat-step>
+            <div class="p-4" style="border:1px solid #c2c2c2">
+              <ng-template matStepLabel>Summary</ng-template>
+              <div>
+                <div class="d-flex justify-content-end text-bold">
+                  <h6 class="text-uppercase">Customer Name : {{customer.name}}</h6>
+                </div>
+                <div class="d-flex justify-content-end text-bold">
+                  <h6>MOBILE : {{customer.mobile}}</h6>
+                  <h2></h2>
+                </div>
+              </div>
+              <hr>
+              <div class="row mt-3" *ngFor="let prop of productMainKeys">
+                <div class="col-md-2">
+                  <h4 class="text-uppercase">{{prop.id}} <small style="font-size: x-small;" class="text-muted">/{{prop.mass}}</small></h4>
+                </div>
+                <div class="col-md-4">
+                  <mat-label>Quantity </mat-label>
+                  <h6>{{prop.quantity | json}}</h6>
+                </div>
+                <div class="col-md-4">
+                  <mat-label>Price </mat-label>
+                  <h6>{{prop.price | json}}</h6>
+                </div>
+                <h6 class="col-md-2 price d-flex justify-content-end ">
+                  {{prop.total | currency:'INR' }}
+                </h6>
+              </div>
+              <div class="d-flex justify-content-end mr-2 mt-2">
+                <h3>Grand Total: <span class="price">{{grandTotal | currency:'INR'}} </span> </h3>
+              </div>
+              <div class="d-flex justify-content-end mr-2 mt-2">
+                <!--<button mat-button matStepperPrevious>Back</button>-->
+                <button mat-raised-button color="accent" (click)="saveProductSell(stepper)" [disabled]="summaryBtnStatus">{{summaryBtnText}}</button>
+              </div>
             </div>
           </mat-step>
           <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            <p>You are now done.</p>
+            <ng-template matStepLabel>Payment</ng-template>
             <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button (click)="stepper.reset()">Reset</button>
+              <div class="d-flex justify-content-end text-bold">
+                <h6 class="text-uppercase">Customer Name : {{customer.name}}</h6>
+              </div>
+              <div class="d-flex justify-content-end text-bold">
+                <h6>MOBILE : {{customer.mobile}}</h6>
+                <h2></h2>
+              </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-end mr-2 mt-2">
+              <h3>Grand Total: <span class="price">{{grandTotal | currency:'INR'}} </span> </h3>
+            </div>
+            <hr>
+            <div>
+              <h3>Payment</h3>
+              <form (ngSubmit)="savePayment()" [formGroup]="paymentFormGroup" class="customer-form">
+                <div class="col-md-12">
+                  <mat-checkbox formControlName="full_paid">Full Paid</mat-checkbox>
+                </div>
+                <div class="col-md-12">
+                  <mat-form-field class="col-md-6" appearance="fill">
+                    <mat-label>Amount Paid </mat-label>
+                    <input formControlName="amount_paid" autofocus matInput type="number" required />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                  <mat-form-field class="col-md-6" appearance="fill">
+                    <mat-label>Pending Amount </mat-label>
+                    <input [readonly]="pendingStatus" formControlName="pending_amount" matInput type="number" />
+                  </mat-form-field>
+                  <mat-form-field class="col-md-6" appearance="fill">
+                    <mat-label>Next Payment Date </mat-label>
+                    <input [disabled]="pendingDueStatus" formControlName="next_payment" [matDatepicker]="picker" autofocus matInput />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                  <button mat-raised-button color="accent" [disabled]="paymentBtnStatus" matStepperNext>{{paymentBtnText}}</button>
+                </div>
+              </form>
             </div>
           </mat-step>
         </mat-horizontal-stepper>

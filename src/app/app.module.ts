@@ -26,6 +26,7 @@ import {MatSnackBarModule,MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { 
   MatDatepickerModule,
   MatNativeDateModule,
@@ -42,7 +43,7 @@ import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
+    routingComponents
     
       ],
   imports: [
@@ -61,6 +62,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSelectModule,
     MatToolbarModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

@@ -58,7 +58,8 @@ export class AddCustomerComponent implements OnInit {
 		},
 		mobile:{
 			required:'Please enter mobile number.',									
-			mobLength:'The mobile must be of 10 digits.'
+      minlength: 'The mobile must be of 10 digits.',
+			maxlength: 'The mobile must be of 10 digits.'
 		},
 		altmobile:{									
 			mobLength:'The mobile must be of 10 digits.'
@@ -162,7 +163,7 @@ export class AddCustomerComponent implements OnInit {
   {
   	this.customerForm = this.custFB.group({
   		name : ['',[Validators.required,Validators.minLength(3)]],
-  		mobile:['',[Validators.required,mobileNoLength],userExists.mobno(this.afs)],
+      mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)], userExists.mobno(this.afs)],
   		altmobile:['',[Validators.minLength(10),Validators.maxLength(10)]],
   		address:['',[Validators.required,Validators.maxLength(50)]],
   		city:['',[Validators.required]],
@@ -195,6 +196,7 @@ export class AddCustomerComponent implements OnInit {
 
   	})
   	.catch(error=>{
+      console.log(error);
   		 this._snackBar.open('Error adding Customer. Try again later');
   		 this.custSaveText = 'Save';
   		 this.custSaveStatus = false;

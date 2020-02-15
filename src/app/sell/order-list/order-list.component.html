@@ -1,0 +1,39 @@
+<p>order-list works!</p>
+<mat-card class="customer-card">
+  <mat-card-content class="p-2 m-5">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Order Date</th>
+          <th scope="col">Product Details</th>
+          <th scope="col">Grand Total</th>
+          <th scope="col">Status</th>
+          <th scope="col">Transaction Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orderData ">
+          <td>
+            {{order.customer_name}}
+          </td>
+          <td>
+            {{order.order_date}}
+          </td>
+          <td>
+            {{order.order_total}}
+          </td>
+          <td>
+            {{order.order_payment_status}}
+          </td>
+          <td>
+            {{order.product_details}}
+          </td>
+          <td>
+            {{order.trans_details}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>

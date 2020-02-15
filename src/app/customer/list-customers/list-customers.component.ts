@@ -1,6 +1,7 @@
 import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import {CustomersService} from '../../services/customers.service';
-import {ICustomer} from '../customer';
+import { ICustomer } from '../../models/customer';
+
 import { Observable } from 'rxjs';
 
 @Component({

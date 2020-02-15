@@ -20,7 +20,17 @@ body {
   font-weight: 600;
 }
 
-.w-100
-{
-	width:100%;
+.w-100 {
+  width: 100%;
+}
+
+
+.price {
+  display: inline-block;
+  font-weight: 400;
+  color: $primary;
+}
+
+.price::first-letter {
+  padding-right: 0.3em;
 }
